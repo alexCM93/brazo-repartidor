@@ -2,6 +2,7 @@
 Global constants
 """
 import pygame
+from machine_config import MachineConfig
 
 # Colors
 black = (0, 0, 0)
@@ -34,6 +35,12 @@ containerWidth = 300
 # Initial position
 initialX = 90
 initialY = -70
+
+# Machine configs
+machineConfig1 = MachineConfig('images/machine_1.png', colors[0], 5, 5)
+machineConfig2 = MachineConfig('images/machine_2.png', colors[1], 10, 10)
+
+fontSize = 20
 
 # Images
 menuBackground = pygame.image.load('images/menu.png')

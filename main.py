@@ -3,6 +3,7 @@ from constants import *
 import random
 
 pygame.init()
+pygame.font.init()
 
 # Screen data
 dimensions = [SCREEN_WIDTH, SCREEN_HEIGHT]
@@ -15,8 +16,9 @@ run = True
 # Game clock
 clock = pygame.time.Clock()
 
-# State variable
-state = states[1]
+# State variable and background
+state = states[0]
+background = menuBackground
 
 # Current speed and position
 currentSpeed_X = 0
@@ -25,9 +27,34 @@ pos_x = initialX
 pos_y = initialY
 
 color = random.choice(colors)
+defaultFont = pygame.font.SysFont('Verdana', fontSize)
 remainingItems = 2
 
-background = mainBackground
+# ==================== FUNCTIONS ==================== #
+
+def count_characters_string(string):
+    count = 0
+    for characters in string:
+        count += 1
+    return count
+
+def draw_rectangle(rect_pos_x, rect_pos_y, background_color, width, height):
+    pygame.draw.rect(screen, background_color, [rect_pos_x, rect_pos_y, width, height])
+
+def draw_text_with_rectangle(rect_pos_x, rect_pos_y, background_color, text):
+    width = count_characters_string(text) * 12
+    height = fontSize * 1.5
+
+    draw_rectangle(rect_pos_x, rect_pos_y, black, width, height)
+    draw_rectangle(rect_pos_x + 2, rect_pos_y + 2, background_color, width - 4, height - 4)
+    text_surface = defaultFont.render(text, False, (0, 0, 0))
+    screen.blit(text_surface, (rect_pos_x, rect_pos_y))
+
+    return text_surface.get_rect()
+
+def point_inside_rect():
+    inside = False
+    return inside
 
 # ==================== MAIN LOOP ==================== #
 
@@ -38,14 +65,30 @@ while run:
     # Empty screen
     screen.fill(black)
 
-    # End program if user quits game
-    for events in pygame.event.get():
-        if events.type == pygame.QUIT:
+    # Draw background
+    screen.blit(background, (0, 0))
+
+    # Save events from Pygame
+    events = pygame.event.get()
+
+    for event in events:
+        if event.type == pygame.QUIT:
             run = False
 
     # State is menu
     if state == states[0]:
         background = menuBackground
+
+        # Config dropdown button
+        machine_button = draw_text_with_rectangle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, green, 'Seleccionar máquina')
+
+        # Run button
+        run_button = draw_text_with_rectangle(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 0.95, green, 'Correr')
+
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONUP:
+                run = False
+
 
     # State is main
     if state == states[1]:
@@ -84,6 +127,10 @@ while run:
         pos_x += currentSpeed_X
         pos_y += currentSpeed_Y
 
+        # Draw rectangles
+        pygame.draw.rect(screen, black, [pos_x, pos_y, 50, 50])
+        pygame.draw.rect(screen, color, [pos_x + rectangleWidth, pos_y + rectangleHeight, 30, 30])
+
         # Change state to results when empty list
         if remainingItems == 0:
             state = states[2]
@@ -91,15 +138,6 @@ while run:
     # State is results
     if state == states[2]:
         background = resultsBackground
-
-    screen.blit(background, (0, 0))
-
-    # Draw background
-    screen.blit(background, (0, 0))
-
-    # Draw rectangles
-    pygame.draw.rect(screen, black, [pos_x, pos_y, 50, 50])
-    pygame.draw.rect(screen, color, [pos_x + rectangleWidth, pos_y + rectangleHeight, 30, 30])
 
     # Update screen
     pygame.display.flip()
