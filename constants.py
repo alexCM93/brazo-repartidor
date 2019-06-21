@@ -33,7 +33,7 @@ containerWidth = 300
 
 # Initial position
 initialX = 90
-initialY = -50
+initialY = -70
 
 # Images
 menuBackground = pygame.image.load('images/menu.png')

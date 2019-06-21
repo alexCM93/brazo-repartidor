@@ -16,7 +16,7 @@ run = True
 clock = pygame.time.Clock()
 
 # State variable
-state = states[0]
+state = states[1]
 
 # Current speed and position
 currentSpeed_X = 0
@@ -43,49 +43,56 @@ while run:
         if events.type == pygame.QUIT:
             run = False
 
+    # State is menu
+    if state == states[0]:
+        background = menuBackground
+
+    # State is main
     if state == states[1]:
-        continue
+        background = mainBackground
+
+        # == Move rectangle depending on condition == #
+
+        if pos_y > 340 and pos_x == 90:
+            currentSpeed_Y = 0
+            currentSpeed_X = 5
+
+        # Item is inside distributor
+        if pos_x > beltWidth:
+            if color == white:
+                currentSpeed_Y = -4
+            if color == green:
+                currentSpeed_Y = 4
+            if color == red:
+                currentSpeed_Y = 2
+            if color == grey:
+                currentSpeed_Y = -2
+
+        # Item is in container
+        if pos_x > beltWidth + containerWidth:
+            currentSpeed_Y = 0
+
+            # Item is out of screen
+        if pos_x > SCREEN_WIDTH:
+            currentSpeed_Y = 5
+            currentSpeed_X = 0
+            pos_x = initialX
+            pos_y = initialY
+            color = random.choice(colors)
+            remainingItems = remainingItems - 1
+
+        pos_x += currentSpeed_X
+        pos_y += currentSpeed_Y
+
+        # Change state to results when empty list
+        if remainingItems == 0:
+            state = states[2]
+
+    # State is results
+    if state == states[2]:
+        background = resultsBackground
 
     screen.blit(background, (0, 0))
-
-    # == Move rectangle depending on condition == #
-
-    if pos_y > 340 and pos_x == 90:
-        currentSpeed_Y = 0
-        currentSpeed_X = 5
-
-    # Item is inside distributor
-    if pos_x > beltWidth:
-        if color == white:
-            currentSpeed_Y = -4
-        if color == green:
-            currentSpeed_Y = 4
-        if color == red:
-            currentSpeed_Y = 2
-        if color == grey:
-            currentSpeed_Y = -2
-
-    # Item is in container
-    if pos_x > beltWidth + containerWidth:
-        currentSpeed_Y = 0  
-
-    # Item is out of screen
-    if pos_x > SCREEN_WIDTH:
-        currentSpeed_Y = 5
-        currentSpeed_X = 0
-        pos_x = initialX
-        pos_y = initialY
-        color = random.choice(colors)
-        print (remainingItems)
-        remainingItems = remainingItems - 1
-
-    pos_x += currentSpeed_X
-    pos_y += currentSpeed_Y
-    
-    # Show results page when 
-    if remainingItems == 0:
-        background = resultsBackground
-        state = states[1]
 
     # Draw background
     screen.blit(background, (0, 0))
