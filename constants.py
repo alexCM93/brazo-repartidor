@@ -12,11 +12,10 @@ colores = [BLANCO, VERDE, ROJO]
 
 
 # Screen dimensions
-SCREEN_WIDTH  = 1000
+SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 750
 
 # images
-
-ImagenFondo1 = pygame.image.load('menu.png')
-ImagenFondo2 = pygame.image.load('fondo.png')
-ImagenFondo3 = pygame.image.load('resultados.png')
+menuBackground = pygame.image.load('images/menu.png')
+mainBackground = pygame.image.load('images/main.png')
+resultsBackground = pygame.image.load('images/results.png')
