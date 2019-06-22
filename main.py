@@ -1,7 +1,7 @@
-import pygame
+# import pygame
 from constants import *
 import random
-
+from dropDown import *
 pygame.init()
 pygame.font.init()
 
@@ -30,19 +30,21 @@ color = random.choice(colors)
 defaultFont = pygame.font.SysFont('Verdana', fontSize)
 remainingItems = 2
 
+# groups
+greyGroup = 0
+whiteGroup = 0
+greenGroup = 0
+redGroup = 0
+
 # ==================== FUNCTIONS ==================== #
 
-def count_characters_string(string):
-    count = 0
-    for characters in string:
-        count += 1
-    return count
 
 def draw_rectangle(rect_pos_x, rect_pos_y, background_color, width, height):
     pygame.draw.rect(screen, background_color, [rect_pos_x, rect_pos_y, width, height])
 
+
 def draw_text_with_rectangle(rect_pos_x, rect_pos_y, background_color, text):
-    width = count_characters_string(text) * 12
+    width = len(text) * 12
     height = fontSize * 1.5
 
     draw_rectangle(rect_pos_x, rect_pos_y, black, width, height)
@@ -52,9 +54,11 @@ def draw_text_with_rectangle(rect_pos_x, rect_pos_y, background_color, text):
 
     return text_surface.get_rect()
 
+
 def point_inside_rect():
     inside = False
     return inside
+
 
 # ==================== MAIN LOOP ==================== #
 
@@ -85,10 +89,10 @@ while run:
         # Run button
         run_button = draw_text_with_rectangle(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 0.95, green, 'Correr')
 
+
         for event in events:
             if event.type == pygame.MOUSEBUTTONUP:
-                run = False
-
+                state = states[1]
 
     # State is main
     if state == states[1]:
@@ -101,15 +105,19 @@ while run:
             currentSpeed_X = 5
 
         # Item is inside distributor
-        if pos_x > beltWidth:
+        if pos_x == beltWidth:
             if color == white:
                 currentSpeed_Y = -4
+                whiteGroup = whiteGroup + 1
             if color == green:
                 currentSpeed_Y = 4
+                greenGroup = greenGroup + 1
             if color == red:
                 currentSpeed_Y = 2
+                redGroup = redGroup + 1
             if color == grey:
                 currentSpeed_Y = -2
+                greyGroup = greyGroup + 1
 
         # Item is in container
         if pos_x > beltWidth + containerWidth:
@@ -138,6 +146,10 @@ while run:
     # State is results
     if state == states[2]:
         background = resultsBackground
+        run_button2 = draw_text_with_rectangle(SCREEN_WIDTH / 4, SCREEN_HEIGHT * 0.95, green, str(greyGroup))
+        run_button3 = draw_text_with_rectangle(SCREEN_WIDTH / 3, SCREEN_HEIGHT * 0.95, green, str(whiteGroup))
+        run_button4 = draw_text_with_rectangle(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 0.95, green, str(greenGroup))
+        run_button5 = draw_text_with_rectangle(SCREEN_WIDTH / 1.5, SCREEN_HEIGHT * 0.95, green, str(redGroup))
 
     # Update screen
     pygame.display.flip()

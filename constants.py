@@ -35,6 +35,9 @@ containerWidth = 300
 # Initial position
 initialX = 90
 initialY = -70
+# Initial speed
+initialSpeed_X = 0
+initialSpeed_Y = 5
 
 # Machine configs
 machineConfig1 = MachineConfig('images/machine_1.png', colors[0], 5, 5)
