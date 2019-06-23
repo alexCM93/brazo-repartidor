@@ -2,7 +2,6 @@
 Global constants
 """
 import pygame
-from machine_config import MachineConfig
 
 # Colors
 black = (0, 0, 0)
@@ -13,7 +12,7 @@ red = (255, 0, 0)
 
 # part Data
 colors = [grey, white, green, red]
-pesos = [10, 20, 30, 40]
+pesos = [5, 10, 15, 20]
 forms = [0, 1, 2, 3]
 
 # Rectangle width

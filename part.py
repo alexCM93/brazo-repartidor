@@ -16,7 +16,8 @@ class Part(object):
         self.partForm = random.choice(forms)
     def drawMenu(self):
         pygame.draw.rect(screen, black, [self.menu_pos[0], self.menu_pos[1], 50, 50])
-        pygame.draw.rect(screen, self.partColor, [self.menu_pos[0] + rectangleWidth, self.menu_pos[1] + rectangleHeight, 30, 30])
+        pygame.draw.rect(screen, self.partColor, [self.menu_pos[0] + self.partPeso,
+                                                  self.menu_pos[1] + self.partPeso, 50 - self.partPeso * 2, 50 - self.partPeso * 2])
     #def drawMain(self):
     def move(self, n ):
         self.menu_pos = (125 + 69 * n, 498)

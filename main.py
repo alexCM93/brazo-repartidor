@@ -32,7 +32,7 @@ greenGroup = 0
 redGroup = 0
 
 # menu initial data
-repartoDropDown = Drop_Down((435, 250), ["Por color", "Por peso", "Por forma"], screen, color2=gray(100))
+repartoDropDown = Drop_Down((435, 250), ["Por color", "Por peso"], screen, color2=gray(100))
 brazoDropDown = Drop_Down((572, 295), list(range(1, 3, 1)), screen, color2=gray(100))
 repartoDropDown.set_status("Por color")
 brazoDropDown.set_status(1)

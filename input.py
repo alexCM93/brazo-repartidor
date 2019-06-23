@@ -1,1 +1,0 @@
-groupSize = 3 #number of parts to distribute
