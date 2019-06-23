@@ -1,6 +1,6 @@
-from constants import *
 import random
 from menu import *
+from part import *
 pygame.init()
 pygame.font.init()
 
@@ -37,6 +37,12 @@ brazoDropDown = Drop_Down((572, 295), list(range(1, 3, 1)), screen, color2=gray(
 repartoDropDown.set_status("Por color")
 brazoDropDown.set_status(1)
 
+# creating parts
+part1 = Part((125, 467), (500, 500), (5, 5), (500, 500), (5, 5),)
+part1.setData()
+part1data = part1.getData()
+print(part1data)
+
 # ==================== FUNCTIONS ==================== #
 
 def draw_rectangle(rect_pos_x, rect_pos_y, background_color, width, height):
@@ -70,17 +76,18 @@ while run:
 
     # Save events from Pygame
     events = pygame.event.get()
-
     for event in events:
         if event.type == pygame.QUIT:
             run = False
-        print(event)
+        #print(event)
+
     # State is menu
     if state == states[0]:
         # draw menu and menu options
         background = menuBackground
         repartoDropDown.draw()
         brazoDropDown.draw()
+        part1.drawMenu()
         if brazoDropDown.get_status() == 1:
             screen.blit(brazo1, (693, 250))
             draw_text_with_rectangle(660, 470, grey, 'Brazo Mecánico genérico', 12)
@@ -88,6 +95,7 @@ while run:
             screen.blit(brazo2, (693, 250))
             draw_text_with_rectangle(660, 470, grey, 'Brazo Mecánico Premium', 12)
             draw_text_with_rectangle(660, 505, grey, 'Doble velocidad', 12)
+        crear = draw_text_with_rectangle(480, 340, grey, 'CREAR', 18)
 
         # check menu option changes and ENTER key presses
         for event in events:

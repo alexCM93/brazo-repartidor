@@ -10,7 +10,11 @@ grey = (100, 100, 100)
 white = (255, 255, 255)
 green = (0, 255, 0)
 red = (255, 0, 0)
+
+# part Data
 colors = [grey, white, green, red]
+pesos = [10, 20, 30, 40]
+forms = [0, 1, 2, 3]
 
 # Rectangle width
 rectangleWidth = 10
@@ -38,10 +42,6 @@ initialY = -70
 # Initial speed
 initialSpeed_X = 0
 initialSpeed_Y = 5
-
-# Machine configs
-machineConfig1 = MachineConfig('images/machine_1.png', colors[0], 5, 5)
-machineConfig2 = MachineConfig('images/machine_2.png', colors[1], 10, 10)
 
 fontSize = 20
 
