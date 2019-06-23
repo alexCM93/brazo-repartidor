@@ -38,10 +38,15 @@ repartoDropDown.set_status("Por color")
 brazoDropDown.set_status(1)
 
 # creating parts
-part1 = Part((125, 467), (500, 500), (5, 5), (500, 500), (5, 5),)
-part1.setData()
-part1data = part1.getData()
-print(part1data)
+numberOfParts = 10
+allparts = []
+def randomParts(n,list):
+
+    for i in range(0, n):
+        list.append(Part(i))
+    return(list)
+
+randomParts(numberOfParts, allparts)
 
 # ==================== FUNCTIONS ==================== #
 
@@ -87,23 +92,37 @@ while run:
         background = menuBackground
         repartoDropDown.draw()
         brazoDropDown.draw()
-        part1.drawMenu()
+        menuDist = 0
+
+
         if brazoDropDown.get_status() == 1:
-            screen.blit(brazo1, (693, 250))
-            draw_text_with_rectangle(660, 470, grey, 'Brazo Mecánico genérico', 12)
+            screen.blit(brazo1, (693, 200))
+            draw_text_with_rectangle(660, 420, grey, 'Brazo Mecánico genérico', 12)
         if brazoDropDown.get_status() == 2:
-            screen.blit(brazo2, (693, 250))
-            draw_text_with_rectangle(660, 470, grey, 'Brazo Mecánico Premium', 12)
-            draw_text_with_rectangle(660, 505, grey, 'Doble velocidad', 12)
+            screen.blit(brazo2, (693, 200))
+            draw_text_with_rectangle(660, 420, grey, 'Brazo Mecánico Premium', 12)
+            draw_text_with_rectangle(660, 455, grey, 'Doble velocidad', 12)
+        crear_rect = pygame.draw.rect(screen, green, pygame.Rect(480, 340, 90, 30))
         crear = draw_text_with_rectangle(480, 340, grey, 'CREAR', 18)
 
         # check menu option changes and ENTER key presses
         for event in events:
+            mouse_rect = pygame.Rect((*pygame.mouse.get_pos(), 1, 1))
             repartoDropDown.events(event)
             brazoDropDown.events(event)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     state = states[1]
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if crear_rect.collidepoint(event.pos):
+                    print("asd")
+                    allparts = []
+                    randomParts(numberOfParts, allparts)
+                    print(allparts)
+        for i in range(0, numberOfParts):
+            allparts[i].move(menuDist)
+            allparts[i].drawMenu()
+            menuDist += 1
 
     # State is main
     if state == states[1]:
