@@ -8,9 +8,9 @@ class Part(object):
         self.name = name
         self.menu_pos = [125, 498]
         self.init_pos = [155, -70]
-        self.init_speed = [0, 5]
+        self.init_speed = [0, 2]
         self.current_pos = [155, -70]
-        self.current_speed = [0, 5]
+        self.current_speed = [0, 2]
         self.partColor = random.choice(colors)
         self.partPeso = random.choice(pesos)
         self.partForm = random.choice(forms)
@@ -23,7 +23,7 @@ class Part(object):
 
     def moveMain(self, n):
         if self.current_pos == self.init_pos:
-            self.current_pos = [155, -50 * n]
+            self.current_pos = [156, -120 * n]
     def setData(self):
         self.partColor = random.choice(colors)
         self.partPeso = random.choice(pesos)
@@ -33,28 +33,37 @@ class Part(object):
     def drawMain(self):
 
 
-        if self.current_pos[1] > 340 and self.current_pos[0] == 155:
+        if self.current_pos[1] > 350 and self.current_pos[0] == 156:
             self.current_speed[1] = 0
-            self.current_speed[0] = 5
+            self.current_speed[0] = 2
 
         speeda = -4
-        speedb = 4
+        speedb = -2
         speedc = 2
-        speedd = -2
-        if self.current_pos[0] == 500:
+        speedd = 4
+        if self.current_pos[0] == 476:
             if self.partColor == white:
                 self.current_speed[1] += speeda
+                self.current_speed[0] = 1
             if self.partColor == green:
                 self.current_speed[1] += speedb
             if self.partColor == red:
                 self.current_speed[1] += speedc
             if self.partColor == grey:
                 self.current_speed[1] += speedd
+                self.current_speed[0] = 1
 
             # Item is in container
         if self.current_pos[0] > 800:
             self.current_speed[1] = 0
 
+        if self.current_pos[0] == 575:
+            if self.partColor == white:
+                self.current_speed[1] = 0
+                self.current_speed[0] = 2
+            if self.partColor == grey:
+                self.current_speed[1] = 0
+                self.current_speed[0] = 2
             # Item is out of screen
         '''    
         if self.current_pos[0] > 1000:
