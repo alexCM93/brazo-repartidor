@@ -187,29 +187,58 @@ while run:
         rec_reset = pygame.draw.rect(screen, green, pygame.Rect(839, 160, 80, 30))
         background = resultsBackground
         if tipoReparto == "Por color":
-
-            run_button2 = draw_text_with_rectangle(211, 323, grey, str(greyGroup), 30)
-            run_button3 = draw_text_with_rectangle(415, 323, grey, str(whiteGroup), 30)
-            run_button4 = draw_text_with_rectangle(613, 323, grey, str(greenGroup), 30)
-            run_button5 = draw_text_with_rectangle(811, 323, grey, str(redGroup), 30)
+            run_button2 = draw_text_with_rectangle(75, 285, grey, str(greyGroup), 30)
+            run_button3 = draw_text_with_rectangle(75, 370, grey, str(whiteGroup), 30)
+            run_button4 = draw_text_with_rectangle(75, 455, grey, str(greenGroup), 30)
+            run_button5 = draw_text_with_rectangle(75, 540, grey, str(redGroup), 30)
+            whiteDist = 0
+            greenDist = 0
+            redDist = 0
+            greyDist = 0
+            for i in range(0, numberOfParts):
+                if allparts[i].partColor == white:
+                    allparts[i].move(whiteDist)
+                    allparts[i].drawResults(275)
+                    whiteDist += 1
+                if allparts[i].partColor == green:
+                    allparts[i].move(greenDist)
+                    allparts[i].drawResults(360)
+                    greenDist += 1
+                if allparts[i].partColor == red:
+                    allparts[i].move(redDist)
+                    allparts[i].drawResults(445)
+                    redDist += 1
+                if allparts[i].partColor == grey:
+                    allparts[i].move(greyDist)
+                    allparts[i].drawResults(530)
+                    greyDist += 1
         if tipoReparto == "Por peso":
+            run_button2 = draw_text_with_rectangle(75, 285, grey, str(peso1Group), 30)
+            run_button3 = draw_text_with_rectangle(75, 370, grey, str(peso2Group), 30)
+            run_button4 = draw_text_with_rectangle(75, 455, grey, str(peso3Group), 30)
+            run_button5 = draw_text_with_rectangle(75, 540, grey, str(peso4Group), 30)
+            peso1Dist = 0
+            peso2Dist = 0
+            peso3Dist = 0
+            peso4Dist = 0
+            for i in range(0, numberOfParts):
+                if allparts[i].partPeso == 5:
+                    allparts[i].move(peso1Dist)
+                    allparts[i].drawResults(275)
+                    peso1Dist += 1
+                if allparts[i].partPeso == 10:
+                    allparts[i].move(peso2Dist)
+                    allparts[i].drawResults(360)
+                    peso2Dist += 1
+                if allparts[i].partPeso == 15:
+                    allparts[i].move(peso3Dist)
+                    allparts[i].drawResults(445)
+                    peso3Dist += 1
+                if allparts[i].partPeso == 20:
+                    allparts[i].move(peso4Dist)
+                    allparts[i].drawResults(530)
+                    peso4Dist += 1
 
-            run_button2 = draw_text_with_rectangle(211, 323, grey, str(peso1Group), 30)
-            run_button3 = draw_text_with_rectangle(415, 323, grey, str(peso2Group), 30)
-            run_button4 = draw_text_with_rectangle(613, 323, grey, str(peso3Group), 30)
-            run_button5 = draw_text_with_rectangle(811, 323, grey, str(peso4Group), 30)
-
-        '''
-        resultDist = 0
-        for i in range(0, numberOfParts):
-            if tipoReparto == "Por color":
-
-            if tipoReparto == "Por peso":
-
-            allparts[i].move(resultDist)
-            allparts[i].drawResults(498)
-            resultDist += 1
-        '''
 
         # check menu option changes and ENTER key presses
 
