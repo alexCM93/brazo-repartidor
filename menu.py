@@ -1,8 +1,10 @@
 import pygame
 
 pygame.init()
+
 def gray(v):
     return (v,v,v)
+
 def text(DISPLAYSURF,X,Y,size,color,text, anchor = "topleft", render = True):
    BASICFONT = pygame.font.Font('freesansbold.ttf', size)
    Text = BASICFONT.render(str(text), True, color)
@@ -11,6 +13,7 @@ def text(DISPLAYSURF,X,Y,size,color,text, anchor = "topleft", render = True):
    if render:
        DISPLAYSURF.blit(Text,TextRect)
    return TextRect
+
 class Drop_Down:
     def __init__(self, pos, options, surface, color=(255, 255, 255), color2=(150, 150, 150), text_size=17, index=0,
                  width=85, height=30):

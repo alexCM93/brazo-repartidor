@@ -37,6 +37,7 @@ repartoDropDown = Drop_Down((435, 250), ["Por color", "Por peso"], screen, color
 brazoDropDown = Drop_Down((572, 295), list(range(1, 3, 1)), screen, color2=gray(100))
 repartoDropDown.set_status("Por color")
 brazoDropDown.set_status(1)
+tipoReparto = repartoDropDown.get_status()
 
 # creating parts
 numberOfParts = 10
@@ -124,21 +125,22 @@ while run:
                     state = states[1]
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if crear_rect.collidepoint(event.pos):
-                    print("asd")
                     allparts = []
                     randomParts(numberOfParts, allparts)
-                    print(allparts)
 
 
     # State is main
     if state == states[1]:
         background = mainBackground
-
+        tipoReparto = repartoDropDown.get_status()
         # == Move rectangle depending on condition == #
         mainDist = 0
         for i in range(0, numberOfParts):
             allparts[i].moveMain(mainDist)
-            allparts[i].drawMain()
+            if tipoReparto == "Por color":
+                allparts[i].drawMain()
+            if tipoReparto == "Por peso":
+                allparts[i].drawMainPeso()
             mainDist += 1
         screen.blit(cover, (0, 0))
 
@@ -153,12 +155,22 @@ while run:
 
     # State is results
     if state == states[2]:
+        rec_reset = pygame.draw.rect(screen, green, pygame.Rect(839, 160, 80, 30))
         background = resultsBackground
         run_button2 = draw_text_with_rectangle(211, 323, grey, str(greyGroup), 30)
         run_button3 = draw_text_with_rectangle(415, 323, grey, str(whiteGroup), 30)
         run_button4 = draw_text_with_rectangle(613, 323, grey, str(greenGroup), 30)
         run_button5 = draw_text_with_rectangle(811, 323, grey, str(redGroup), 30)
 
+
+
+        # check menu option changes and ENTER key presses
+
+        reset = draw_text_with_rectangle(839, 160, white, 'RESET', 16)
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if rec_reset.collidepoint(event.pos):
+                    state = states[0]
     # Update screen
     pygame.display.flip()
 

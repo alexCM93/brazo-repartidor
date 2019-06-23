@@ -2,6 +2,7 @@
 Global constants
 """
 import pygame
+framesPerSecond = 60
 
 # Colors
 black = (0, 0, 0)
@@ -15,12 +16,6 @@ colors = [grey, white, green, red]
 pesos = [5, 10, 15, 20]
 forms = [0, 1, 2, 3]
 
-# Rectangle width
-rectangleWidth = 10
-rectangleHeight = 10
-
-framesPerSecond = 60
-
 # States
 menuState = 0
 mainState = 1
@@ -30,10 +25,6 @@ states = [menuState, mainState, resultsState]
 # Screen dimensions
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 750
-
-#
-beltWidth = 500
-containerWidth = 300
 
 # Initial position
 initialX = 155
