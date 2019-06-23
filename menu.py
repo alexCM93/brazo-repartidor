@@ -13,7 +13,7 @@ def text(DISPLAYSURF,X,Y,size,color,text, anchor = "topleft", render = True):
    return TextRect
 class Drop_Down:
     def __init__(self, pos, options, surface, color=(255, 255, 255), color2=(150, 150, 150), text_size=17, index=0,
-                 width=75, height=30):
+                 width=85, height=30):
         self.pygame = pygame
         self.pos = pos
         self.options = options

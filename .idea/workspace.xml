@@ -14,21 +14,17 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.64252335">
+    <splitter split-orientation="horizontal" split-proportion="0.7928349">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
+                <state relative-caret-position="315">
+                  <caret line="151" column="55" selection-start-line="151" selection-start-column="55" selection-end-line="151" selection-end-column="55" />
                   <folding>
                     <element signature="e#16#39#0" expanded="true" />
-                    <element signature="e#832#915#0" />
-                    <element signature="e#1000#1362#0" />
-                    <element signature="e#1394#1426#0" />
                     <element signature="e#2331#3778#0" />
-                    <element signature="e#3838#4311#0" />
                   </folding>
                 </state>
               </provider>
@@ -65,8 +61,8 @@
           <file pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/menu.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="291">
-                  <caret line="65" column="34" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
+                <state relative-caret-position="249">
+                  <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
                   <folding>
                     <element signature="e#46#60#0" />
                   </folding>
@@ -426,8 +422,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/menu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="291">
-          <caret line="65" column="34" selection-start-line="65" selection-start-column="34" selection-end-line="65" selection-end-column="34" />
+        <state relative-caret-position="249">
+          <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
           <folding>
             <element signature="e#46#60#0" />
           </folding>
@@ -436,15 +432,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="42" column="27" selection-start-line="42" selection-start-column="27" selection-end-line="42" selection-end-column="27" />
+        <state relative-caret-position="315">
+          <caret line="151" column="55" selection-start-line="151" selection-start-column="55" selection-end-line="151" selection-end-column="55" />
           <folding>
             <element signature="e#16#39#0" expanded="true" />
-            <element signature="e#832#915#0" />
-            <element signature="e#1000#1362#0" />
-            <element signature="e#1394#1426#0" />
             <element signature="e#2331#3778#0" />
-            <element signature="e#3838#4311#0" />
           </folding>
         </state>
       </provider>
