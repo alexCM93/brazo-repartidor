@@ -42,8 +42,8 @@ brazoDropDown.set_status(1)
 def draw_rectangle(rect_pos_x, rect_pos_y, background_color, width, height):
     pygame.draw.rect(screen, background_color, [rect_pos_x, rect_pos_y, width, height])
 
-def draw_text_with_rectangle(rect_pos_x, rect_pos_y, background_color, text):
-    width = len(text) * 30
+def draw_text_with_rectangle(rect_pos_x, rect_pos_y, background_color, text, width_space):
+    width = len(text) * width_space
     height = fontSize * 1.5
 
     draw_rectangle(rect_pos_x, rect_pos_y, black, width, height)
@@ -81,6 +81,13 @@ while run:
         background = menuBackground
         repartoDropDown.draw()
         brazoDropDown.draw()
+        if brazoDropDown.get_status() == 1:
+            screen.blit(brazo1, (693, 250))
+            draw_text_with_rectangle(660, 470, grey, 'Brazo Mecánico genérico', 12)
+        if brazoDropDown.get_status() == 2:
+            screen.blit(brazo2, (693, 250))
+            draw_text_with_rectangle(660, 470, grey, 'Brazo Mecánico Premium', 12)
+            draw_text_with_rectangle(660, 505, grey, 'Doble velocidad', 12)
 
         # check menu option changes and ENTER key presses
         for event in events:
@@ -142,10 +149,10 @@ while run:
     # State is results
     if state == states[2]:
         background = resultsBackground
-        run_button2 = draw_text_with_rectangle(211, 323, grey, str(greyGroup))
-        run_button3 = draw_text_with_rectangle(415, 323, grey, str(whiteGroup))
-        run_button4 = draw_text_with_rectangle(613, 323, grey, str(greenGroup))
-        run_button5 = draw_text_with_rectangle(811, 323, grey, str(redGroup))
+        run_button2 = draw_text_with_rectangle(211, 323, grey, str(greyGroup), 30)
+        run_button3 = draw_text_with_rectangle(415, 323, grey, str(whiteGroup), 30)
+        run_button4 = draw_text_with_rectangle(613, 323, grey, str(greenGroup), 30)
+        run_button5 = draw_text_with_rectangle(811, 323, grey, str(redGroup), 30)
 
     # Update screen
     pygame.display.flip()

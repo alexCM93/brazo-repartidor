@@ -49,3 +49,5 @@ fontSize = 20
 menuBackground = pygame.image.load('images/menu.png')
 mainBackground = pygame.image.load('images/main.png')
 resultsBackground = pygame.image.load('images/results.png')
+brazo1 = pygame.image.load('images/brazo1.png')
+brazo2 = pygame.image.load('images/brazo2.png')
