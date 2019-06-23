@@ -89,30 +89,30 @@ def Adv_Fonts(pos, display, size, text, font = "Sans", color = (0, 0, 0),  itali
         display.blit(Text, TextRect)
     return (Text, TextRect)
 
-def draw_menu(self):
-        self.Display.blit(self.images["MainMenu"], (0, 0))
-        self.subDropDown.draw()
-        self.minesDropDown.draw()
-        self.themeDropDown.draw()
+def draw_menu():
+        #screen.blit(images["menu"], (0, 0))
+        subDropDown.draw()
+        minesDropDown.draw()
+        themeDropDown.draw()
 
-        Adv_Fonts(self.scale((90, 580)),
-                  self.Display, self.scaleY(15), "Grid Subdivisions",
+        Adv_Fonts(scale((90, 580)),
+                  Display, scaleY(15), "Grid Subdivisions",
                   color=(255, 255, 0), font="freesansbold", bold=True, anchor="topleft")
 
-        Adv_Fonts(self.scale((200, 580)),
-                  self.Display, self.scaleY(15), "Mine Density",
+        Adv_Fonts(scale((200, 580)),
+                  Display, scaleY(15), "Mine Density",
                   color=(255, 255, 0), font="freesansbold", bold=True, anchor="topleft")
 
-        Adv_Fonts(self.scale((300 + self.scaleX(75 / 2), 580)),
-                  self.Display, self.scaleY(15), "Theme",
+        Adv_Fonts(scale((300 + scaleX(75 / 2), 580)),
+                  Display, scaleY(15), "Theme",
                   color=(255, 255, 0), font="freesansbold", bold=True, anchor="midtop")
 
-        Adv_Fonts((self.Display.get_width() // 2, self.Display.get_height() // 2),
-                  self.Display, self.scaleY(50), "Press Enter to Continue",
+        Adv_Fonts((Display.get_width() // 2, Display.get_height() // 2),
+                  Display, scaleY(50), "Press Enter to Continue",
                   color=(255, 255, 0), font="monospace", bold=True)
 
-        Adv_Fonts((self.Display.get_width() // 2, self.Display.get_height() - self.scaleY(100)),
-                  self.Display, self.scaleY(20), "Press <R> to regenerate board",
+        Adv_Fonts((Display.get_width() // 2, Display.get_height() - scaleY(100)),
+                  Display, scaleY(20), "Press <R> to regenerate board",
                   color=(255, 255, 0), font="monospace", bold=True)
 Display = 1
 def gray(v):

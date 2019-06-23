@@ -2,6 +2,7 @@
 from constants import *
 import random
 from dropDown import *
+from menu import *
 pygame.init()
 pygame.font.init()
 
@@ -35,6 +36,11 @@ greyGroup = 0
 whiteGroup = 0
 greenGroup = 0
 redGroup = 0
+
+repartoDropDown = Drop_Down((435, 250), ["Por color", "Por peso", "Por forma"], screen, color2=gray(100))
+brazoDropDown = Drop_Down((435, 295), list(range(1, 3, 1)), screen, color2=gray(100))
+repartoDropDown.set_status("Por color")
+brazoDropDown.set_status(1)
 
 # ==================== FUNCTIONS ==================== #
 
@@ -83,16 +89,19 @@ while run:
     if state == states[0]:
         background = menuBackground
 
-        # Config dropdown button
-        machine_button = draw_text_with_rectangle(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, green, 'Seleccionar máquina')
 
-        # Run button
-        run_button = draw_text_with_rectangle(SCREEN_WIDTH / 2, SCREEN_HEIGHT * 0.95, green, 'Correr')
+        repartoDropDown.draw()
+        brazoDropDown.draw()
 
 
         for event in events:
-            if event.type == pygame.MOUSEBUTTONUP:
-                state = states[1]
+            repartoDropDown.events(event)
+            brazoDropDown.events(event)
+            print(event)
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:
+                    state = states[1]
+
 
     # State is main
     if state == states[1]:
