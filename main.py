@@ -31,6 +31,10 @@ greyGroup = 0
 whiteGroup = 0
 greenGroup = 0
 redGroup = 0
+peso1Group = 0
+peso2Group = 0
+peso3Group = 0
+peso4Group = 0
 
 # menu initial data
 repartoDropDown = Drop_Down((435, 250), ["Por color", "Por peso"], screen, color2=gray(100))
@@ -96,6 +100,32 @@ while run:
     # State is menu
     if state == states[0]:
         # draw menu and menu options
+        greyGroup = 0
+        whiteGroup = 0
+        greenGroup = 0
+        redGroup = 0
+        peso1Group = 0
+        peso2Group = 0
+        peso3Group = 0
+        peso4Group = 0
+        for i in range(0, numberOfParts):
+            if allparts[i].partColor == white:
+                peso1Group += 1
+            if allparts[i].partColor == green:
+                peso2Group += 1
+            if allparts[i].partColor == red:
+                peso3Group += 1
+            if allparts[i].partColor == grey:
+                peso4Group += 1
+        for i in range(0, numberOfParts):
+            if allparts[i].partColor == white:
+                greyGroup += 1
+            if allparts[i].partColor == green:
+                whiteGroup += 1
+            if allparts[i].partColor == red:
+                greenGroup += 1
+            if allparts[i].partColor == grey:
+                redGroup += 1
         background = menuBackground
         repartoDropDown.draw()
         brazoDropDown.draw()
@@ -128,7 +158,6 @@ while run:
                     allparts = []
                     randomParts(numberOfParts, allparts)
 
-
     # State is main
     if state == states[1]:
         background = mainBackground
@@ -157,12 +186,30 @@ while run:
     if state == states[2]:
         rec_reset = pygame.draw.rect(screen, green, pygame.Rect(839, 160, 80, 30))
         background = resultsBackground
-        run_button2 = draw_text_with_rectangle(211, 323, grey, str(greyGroup), 30)
-        run_button3 = draw_text_with_rectangle(415, 323, grey, str(whiteGroup), 30)
-        run_button4 = draw_text_with_rectangle(613, 323, grey, str(greenGroup), 30)
-        run_button5 = draw_text_with_rectangle(811, 323, grey, str(redGroup), 30)
+        if tipoReparto == "Por color":
 
+            run_button2 = draw_text_with_rectangle(211, 323, grey, str(greyGroup), 30)
+            run_button3 = draw_text_with_rectangle(415, 323, grey, str(whiteGroup), 30)
+            run_button4 = draw_text_with_rectangle(613, 323, grey, str(greenGroup), 30)
+            run_button5 = draw_text_with_rectangle(811, 323, grey, str(redGroup), 30)
+        if tipoReparto == "Por peso":
 
+            run_button2 = draw_text_with_rectangle(211, 323, grey, str(peso1Group), 30)
+            run_button3 = draw_text_with_rectangle(415, 323, grey, str(peso2Group), 30)
+            run_button4 = draw_text_with_rectangle(613, 323, grey, str(peso3Group), 30)
+            run_button5 = draw_text_with_rectangle(811, 323, grey, str(peso4Group), 30)
+
+        '''
+        resultDist = 0
+        for i in range(0, numberOfParts):
+            if tipoReparto == "Por color":
+
+            if tipoReparto == "Por peso":
+
+            allparts[i].move(resultDist)
+            allparts[i].drawResults(498)
+            resultDist += 1
+        '''
 
         # check menu option changes and ENTER key presses
 
@@ -171,6 +218,8 @@ while run:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if rec_reset.collidepoint(event.pos):
                     state = states[0]
+                    allparts = []
+                    randomParts(numberOfParts, allparts)
     # Update screen
     pygame.display.flip()
 

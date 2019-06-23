@@ -134,3 +134,9 @@ class Part(object):
         pygame.draw.rect(screen, self.partColor, [self.current_pos[0] + self.partPeso,
                                                   self.current_pos[1] + self.partPeso, 50 - self.partPeso * 2,
                                                   50 - self.partPeso * 2])
+
+    def drawResults(self, y):
+        pygame.draw.rect(screen, black, [self.menu_pos[0], y, 50, 50])
+        pygame.draw.rect(screen, self.partColor, [self.menu_pos[0] + self.partPeso,
+                                                  y + self.partPeso, 50 - self.partPeso * 2,
+                                                  50 - self.partPeso * 2])
