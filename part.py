@@ -37,10 +37,10 @@ class Part(object):
             self.current_speed[1] = 0
             self.current_speed[0] = 2
 
-        speeda = -4
-        speedb = -2
-        speedc = 2
-        speedd = 4
+        speeda = -3
+        speedb = -0.9
+        speedc = 0.9
+        speedd = 3
         if self.current_pos[0] == 476:
             if self.partColor == white:
                 self.current_speed[1] += speeda
@@ -54,14 +54,20 @@ class Part(object):
                 self.current_speed[0] = 1
 
             # Item is in container
-        if self.current_pos[0] > 800:
-            self.current_speed[1] = 0
 
-        if self.current_pos[0] == 575:
+
+        if self.current_pos[0] == 562:
             if self.partColor == white:
                 self.current_speed[1] = 0
                 self.current_speed[0] = 2
             if self.partColor == grey:
+                self.current_speed[1] = 0
+                self.current_speed[0] = 2
+        if self.current_pos[0] >= 665:
+            if self.partColor == green:
+                self.current_speed[1] = 0
+                self.current_speed[0] = 2
+            if self.partColor == red:
                 self.current_speed[1] = 0
                 self.current_speed[0] = 2
             # Item is out of screen

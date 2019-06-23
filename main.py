@@ -140,51 +140,17 @@ while run:
             allparts[i].moveMain(mainDist)
             allparts[i].drawMain()
             mainDist += 1
+        screen.blit(cover, (0, 0))
 
-        '''
-        if pos_y > 340 and pos_x == 155:
-            currentSpeed_Y = 0
-            currentSpeed_X = 5
+        rec_resultados = pygame.draw.rect(screen, green, pygame.Rect(100, 600, 155, 30))
+        resultados = draw_text_with_rectangle(100, 600, white, 'RESULTADOS', 16)
 
-        # Item is inside distributor
-        if pos_x == beltWidth:
-            if color == white:
-                currentSpeed_Y = -4
-                whiteGroup = whiteGroup + 1
-            if color == green:
-                currentSpeed_Y = 4
-                greenGroup = greenGroup + 1
-            if color == red:
-                currentSpeed_Y = 2
-                redGroup = redGroup + 1
-            if color == grey:
-                currentSpeed_Y = -2
-                greyGroup = greyGroup + 1
+        # check menu option changes and ENTER key presses
+        for event in events:
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                if rec_resultados.collidepoint(event.pos):
+                    state = states[2]
 
-        # Item is in container
-        if pos_x > beltWidth + containerWidth:
-            currentSpeed_Y = 0
-
-            # Item is out of screen
-        if pos_x > SCREEN_WIDTH:
-            currentSpeed_Y = 5
-            currentSpeed_X = 0
-            pos_x = initialX
-            pos_y = initialY
-            color = random.choice(colors)
-            remainingItems = remainingItems - 1
-
-        pos_x += currentSpeed_X
-        pos_y += currentSpeed_Y
-
-        # Draw rectangles
-        pygame.draw.rect(screen, black, [pos_x, pos_y, 50, 50])
-        pygame.draw.rect(screen, color, [pos_x + rectangleWidth, pos_y + rectangleHeight, 30, 30])
-
-        # Change state to results when empty list
-        if remainingItems == 0:
-            state = states[2]
-        '''
     # State is results
     if state == states[2]:
         background = resultsBackground
