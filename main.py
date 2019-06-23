@@ -162,14 +162,21 @@ while run:
     if state == states[1]:
         background = mainBackground
         tipoReparto = repartoDropDown.get_status()
+        tipoBrazo = brazoDropDown.get_status()
         # == Move rectangle depending on condition == #
         mainDist = 0
         for i in range(0, numberOfParts):
             allparts[i].moveMain(mainDist)
             if tipoReparto == "Por color":
-                allparts[i].drawMain()
+                if tipoBrazo == 1:
+                    allparts[i].drawMain()
+                if tipoBrazo == 2:
+                    allparts[i].drawMainFast(2)
             if tipoReparto == "Por peso":
-                allparts[i].drawMainPeso()
+                if tipoBrazo == 1:
+                    allparts[i].drawMainPeso()
+                if tipoBrazo == 2:
+                    allparts[i].drawMainPesoFast(2)
             mainDist += 1
         screen.blit(cover, (0, 0))
 
