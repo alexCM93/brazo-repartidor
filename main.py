@@ -1,6 +1,7 @@
 import random
 from menu import *
 from part import *
+
 pygame.init()
 pygame.font.init()
 
@@ -25,7 +26,7 @@ pos_y = initialY
 color = random.choice(colors)
 
 # groups
-remainingItems = 2
+remainingItems = 3
 greyGroup = 0
 whiteGroup = 0
 greenGroup = 0
@@ -40,18 +41,22 @@ brazoDropDown.set_status(1)
 # creating parts
 numberOfParts = 10
 allparts = []
-def randomParts(n,list):
 
+
+def randomParts(n, list):
     for i in range(0, n):
         list.append(Part(i))
-    return(list)
+    return (list)
+
 
 randomParts(numberOfParts, allparts)
+
 
 # ==================== FUNCTIONS ==================== #
 
 def draw_rectangle(rect_pos_x, rect_pos_y, background_color, width, height):
     pygame.draw.rect(screen, background_color, [rect_pos_x, rect_pos_y, width, height])
+
 
 def draw_text_with_rectangle(rect_pos_x, rect_pos_y, background_color, text, width_space):
     width = len(text) * width_space
@@ -63,6 +68,7 @@ def draw_text_with_rectangle(rect_pos_x, rect_pos_y, background_color, text, wid
     screen.blit(text_surface, (rect_pos_x + 7, rect_pos_y))
 
     return text_surface.get_rect()
+
 
 # Main loop flag control
 run = True
@@ -84,7 +90,7 @@ while run:
     for event in events:
         if event.type == pygame.QUIT:
             run = False
-        #print(event)
+        # print(event)
 
     # State is menu
     if state == states[0]:
@@ -93,7 +99,10 @@ while run:
         repartoDropDown.draw()
         brazoDropDown.draw()
         menuDist = 0
-
+        for i in range(0, numberOfParts):
+            allparts[i].move(menuDist)
+            allparts[i].drawMenu()
+            menuDist += 1
 
         if brazoDropDown.get_status() == 1:
             screen.blit(brazo1, (693, 200))
@@ -119,18 +128,21 @@ while run:
                     allparts = []
                     randomParts(numberOfParts, allparts)
                     print(allparts)
-        for i in range(0, numberOfParts):
-            allparts[i].move(menuDist)
-            allparts[i].drawMenu()
-            menuDist += 1
+
 
     # State is main
     if state == states[1]:
         background = mainBackground
 
         # == Move rectangle depending on condition == #
+        mainDist = 0
+        for i in range(0, numberOfParts):
+            allparts[i].moveMain(mainDist)
+            allparts[i].drawMain()
+            mainDist += 1
 
-        if pos_y > 340 and pos_x == 90:
+        '''
+        if pos_y > 340 and pos_x == 155:
             currentSpeed_Y = 0
             currentSpeed_X = 5
 
@@ -172,7 +184,7 @@ while run:
         # Change state to results when empty list
         if remainingItems == 0:
             state = states[2]
-
+        '''
     # State is results
     if state == states[2]:
         background = resultsBackground

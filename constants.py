@@ -36,7 +36,7 @@ beltWidth = 500
 containerWidth = 300
 
 # Initial position
-initialX = 90
+initialX = 155
 initialY = -70
 # Initial speed
 initialSpeed_X = 0
