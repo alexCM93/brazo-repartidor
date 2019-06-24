@@ -2,9 +2,9 @@ from constants import *
 import random
 
 pygame.init()
-dimensions = [SCREEN_WIDTH, SCREEN_HEIGHT]
-screen = pygame.display.set_mode(dimensions)
 
+
+# class Part, controls part object movement, position and size
 
 class Part(object):
     def __init__(self, name):
@@ -16,35 +16,32 @@ class Part(object):
         self.current_speed = [0, 2]
         self.partColor = random.choice(colors)
         self.partPeso = random.choice(pesos)
-        self.partForm = random.choice(forms)
 
-    def drawMenu(self):
+    def drawMenu(self):  # draws all parts on the menu screen
         pygame.draw.rect(screen, black, [self.menu_pos[0], self.menu_pos[1], 50, 50])
         pygame.draw.rect(screen, self.partColor, [self.menu_pos[0] + self.partPeso,
                                                   self.menu_pos[1] + self.partPeso, 50 - self.partPeso * 2,
                                                   50 - self.partPeso * 2])
 
-    def move(self, n):
+    def move(self, n):  # moves the initial position of part so they don't draw over eachother
         self.menu_pos = (125 + 69 * n, 498)
 
-    def moveMain(self, n):
+    def moveMain(self, n):  # moves parts vertically on main screen so they don't draw over eachother
         if self.current_pos == self.init_pos:
             self.current_pos = [156, -120 * n]
 
-    def setData(self):
+    def setData(self):  # assigns a random color and weight to every part object
         self.partColor = random.choice(colors)
         self.partPeso = random.choice(pesos)
-        self.partForm = random.choice(forms)
-
-    def getData(self):
-        return (self.partColor, self.partPeso, self.partForm)
 
     def drawMain(self):
 
+        # change direction when part is at horizontal belt
         if self.current_pos[1] > 350 and self.current_pos[0] == 156:
             self.current_speed[1] = 0
             self.current_speed[0] = 2
 
+        # change direction depending on part color
         speeda = -3
         speedb = -0.9
         speedc = 0.9
@@ -63,6 +60,7 @@ class Part(object):
 
             # Item is in container
 
+        # restore horizontal movevent when part is in container
         if self.current_pos[0] == 562:
             if self.partColor == white:
                 self.current_speed[1] = 0
@@ -78,14 +76,17 @@ class Part(object):
                 self.current_speed[1] = 0
                 self.current_speed[0] = 2
 
+        # move the part according to it's speed
         self.current_pos[0] += self.current_speed[0]
         self.current_pos[1] += self.current_speed[1]
 
-        # Draw rectangles
+        # Draw the part
         pygame.draw.rect(screen, black, [self.current_pos[0], self.current_pos[1], 50, 50])
         pygame.draw.rect(screen, self.partColor, [self.current_pos[0] + self.partPeso,
                                                   self.current_pos[1] + self.partPeso, 50 - self.partPeso * 2,
                                                   50 - self.partPeso * 2])
+
+        # draw the arm
         if self.current_pos[0] > 476 and self.current_pos[0] < 500:
             if self.partColor == white:
                 arm = arm1
@@ -101,6 +102,7 @@ class Part(object):
                 screen.blit(arm, (353, 240))
         else:
             screen.blit(arm0, (353, 240))
+
     def drawMainFast(self, n):
 
         if self.current_pos[1] > 350 and self.current_pos[0] == 156:
@@ -163,6 +165,7 @@ class Part(object):
                 screen.blit(arm, (353, 240))
         else:
             screen.blit(arm0, (353, 240))
+
     def drawMainPeso(self):
 
         if self.current_pos[1] > 350 and self.current_pos[0] == 156:
@@ -225,6 +228,7 @@ class Part(object):
                 screen.blit(arm, (353, 240))
         else:
             screen.blit(arm0, (353, 240))
+
     def drawMainPesoFast(self, n):
 
         if self.current_pos[1] > 350 and self.current_pos[0] == 156:
@@ -290,7 +294,7 @@ class Part(object):
         else:
             screen.blit(arm0, (353, 240))
 
-    def drawResults(self, y):
+    def drawResults(self, y):  # draw parts in results screen
         pygame.draw.rect(screen, black, [self.menu_pos[0], y, 50, 50])
         pygame.draw.rect(screen, self.partColor, [self.menu_pos[0] + self.partPeso,
                                                   y + self.partPeso, 50 - self.partPeso * 2,

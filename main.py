@@ -1,20 +1,13 @@
-import random
 from menu import *
 from part import *
 
 pygame.init()
 pygame.font.init()
 
-# Screen data
-dimensions = [SCREEN_WIDTH, SCREEN_HEIGHT]
-screen = pygame.display.set_mode(dimensions)
+# Screen name
 pygame.display.set_caption("Brazo repartidor")
-defaultFont = pygame.font.SysFont('Verdana', fontSize)
 
-# Game clock
-clock = pygame.time.Clock()
-
-# State variable and background
+# Initial state variable and background
 state = states[0]
 background = menuBackground
 
@@ -25,8 +18,7 @@ pos_x = initialX
 pos_y = initialY
 color = random.choice(colors)
 
-# groups
-remainingItems = 3
+# create empty groups
 greyGroup = 0
 whiteGroup = 0
 greenGroup = 0
@@ -37,43 +29,40 @@ peso3Group = 0
 peso4Group = 0
 
 # menu initial data
-repartoDropDown = Drop_Down((435, 250), ["Por color", "Por peso"], screen, color2=gray(100))
-brazoDropDown = Drop_Down((572, 295), list(range(1, 3, 1)), screen, color2=gray(100))
+repartoDropDown = Drop_Down((435, 250), ["Por color", "Por peso"], screen)
+brazoDropDown = Drop_Down((572, 295), list(range(1, 3, 1)), screen)
 repartoDropDown.set_status("Por color")
 brazoDropDown.set_status(1)
 tipoReparto = repartoDropDown.get_status()
 
-# creating parts
-numberOfParts = 10
-allparts = []
 
+# ==================== FUNCTIONS ==================== #
 
-def randomParts(n, list):
+def randomParts(n, list):  # creates a list of parts of n length
     for i in range(0, n):
         list.append(Part(i))
     return (list)
 
 
-randomParts(numberOfParts, allparts)
-
-
-# ==================== FUNCTIONS ==================== #
-
-def draw_rectangle(rect_pos_x, rect_pos_y, background_color, width, height):
+def draw_rectangle(rect_pos_x, rect_pos_y, background_color, width, height):  # draws a rectangle
     pygame.draw.rect(screen, background_color, [rect_pos_x, rect_pos_y, width, height])
 
 
-def draw_text_with_rectangle(rect_pos_x, rect_pos_y, background_color, text, width_space):
+def draw_text_with_rectangle(rect_pos_x, rect_pos_y, background_color, text, width_space):  # draws a rect and text
     width = len(text) * width_space
     height = fontSize * 1.5
-
     draw_rectangle(rect_pos_x, rect_pos_y, black, width, height)
     draw_rectangle(rect_pos_x + 2, rect_pos_y + 2, background_color, width - 4, height - 4)
     text_surface = defaultFont.render(text, False, (0, 0, 0))
     screen.blit(text_surface, (rect_pos_x + 7, rect_pos_y))
 
-    return text_surface.get_rect()
 
+# ======================================== #
+
+# creating parts
+numberOfParts = 10
+allparts = []
+randomParts(numberOfParts, allparts)
 
 # Main loop flag control
 run = True
@@ -95,11 +84,10 @@ while run:
     for event in events:
         if event.type == pygame.QUIT:
             run = False
-        # print(event)
 
     # State is menu
     if state == states[0]:
-        # draw menu and menu options
+        # reset groups, draw menu and menu options
         greyGroup = 0
         whiteGroup = 0
         greenGroup = 0
@@ -108,6 +96,7 @@ while run:
         peso2Group = 0
         peso3Group = 0
         peso4Group = 0
+        # count number of parts on each group
         for i in range(0, numberOfParts):
             if allparts[i].partPeso == 5:
                 peso1Group += 1
@@ -126,26 +115,28 @@ while run:
                 redGroup += 1
             if allparts[i].partColor == grey:
                 greyGroup += 1
+        # draw background and dropdowns
         background = menuBackground
         repartoDropDown.draw()
         brazoDropDown.draw()
+        # draw parts
         menuDist = 0
         for i in range(0, numberOfParts):
             allparts[i].move(menuDist)
             allparts[i].drawMenu()
             menuDist += 1
-
+        # draw arm images and text
         if brazoDropDown.get_status() == 1:
             screen.blit(brazo1, (693, 200))
-            draw_text_with_rectangle(660, 420, grey, 'Brazo Mecánico genérico', 12)
+            draw_text_with_rectangle(660, 420, lightgrey, 'Brazo Mecánico genérico', 12)
         if brazoDropDown.get_status() == 2:
             screen.blit(brazo2, (693, 200))
-            draw_text_with_rectangle(660, 420, grey, 'Brazo Mecánico Premium', 12)
-            draw_text_with_rectangle(660, 455, grey, 'Doble velocidad', 12)
+            draw_text_with_rectangle(660, 420, lightgrey, 'Brazo Mecánico Premium', 12)
+            draw_text_with_rectangle(660, 455, lightgrey, 'Doble velocidad', 12)
+        # draw CREAR button
         crear_rect = pygame.draw.rect(screen, green, pygame.Rect(480, 340, 90, 30))
-        crear = draw_text_with_rectangle(480, 340, grey, 'CREAR', 18)
-
-        # check menu option changes and ENTER key presses
+        crear = draw_text_with_rectangle(480, 340, lightgrey, 'CREAR', 18)
+        # check if menu option changes and ENTER key presses
         for event in events:
             mouse_rect = pygame.Rect((*pygame.mouse.get_pos(), 1, 1))
             repartoDropDown.events(event)
@@ -163,7 +154,7 @@ while run:
         background = mainBackground
         tipoReparto = repartoDropDown.get_status()
         tipoBrazo = brazoDropDown.get_status()
-        # == Move rectangle depending on condition == #
+        # move rectangle depending on condition
         mainDist = 0
         for i in range(0, numberOfParts):
             allparts[i].moveMain(mainDist)
@@ -183,7 +174,7 @@ while run:
         rec_resultados = pygame.draw.rect(screen, green, pygame.Rect(100, 600, 155, 30))
         resultados = draw_text_with_rectangle(100, 600, white, 'RESULTADOS', 16)
 
-        # check menu option changes and ENTER key presses
+        # check if menu option changes and ENTER key presses
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
                 if rec_resultados.collidepoint(event.pos):
@@ -191,7 +182,7 @@ while run:
 
     # State is results
     if state == states[2]:
-        rec_reset = pygame.draw.rect(screen, green, pygame.Rect(839, 160, 80, 30))
+
         background = resultsBackground
         if tipoReparto == "Por color":
             run_button2 = draw_text_with_rectangle(75, 285, grey, str(whiteGroup), 30)
@@ -246,9 +237,9 @@ while run:
                     allparts[i].drawResults(530)
                     peso4Dist += 1
 
-
         # check menu option changes and ENTER key presses
 
+        rec_reset = pygame.draw.rect(screen, green, pygame.Rect(839, 160, 80, 30))
         reset = draw_text_with_rectangle(839, 160, white, 'RESET', 16)
         for event in events:
             if event.type == pygame.MOUSEBUTTONDOWN:
@@ -264,6 +255,7 @@ while run:
                     peso2Group = 0
                     peso3Group = 0
                     peso4Group = 0
+
     # Update screen
     pygame.display.flip()
 

@@ -2,40 +2,44 @@
 Global constants
 """
 import pygame
+pygame.init()
 framesPerSecond = 60
+# Game clock
+clock = pygame.time.Clock()
 
-# Colors
+# define colors
+lightgrey = (150, 150, 150)
 black = (0, 0, 0)
 grey = (100, 100, 100)
 white = (255, 255, 255)
 green = (0, 255, 0)
 red = (255, 0, 0)
 
-# part Data
+# define part data list
 colors = [grey, white, green, red]
 pesos = [5, 10, 15, 20]
-forms = [0, 1, 2, 3]
 
-# States
+# define program states
 menuState = 0
 mainState = 1
 resultsState = 2
 states = [menuState, mainState, resultsState]
 
-# Screen dimensions
+# define screen dimensions
 SCREEN_WIDTH = 1000
 SCREEN_HEIGHT = 750
+dimensions = [SCREEN_WIDTH, SCREEN_HEIGHT]
+screen = pygame.display.set_mode(dimensions)
 
-# Initial position
+# define initial part position
 initialX = 155
 initialY = -70
-# Initial speed
-initialSpeed_X = 0
-initialSpeed_Y = 5
 
+# define default font
 fontSize = 20
+defaultFont = pygame.font.SysFont('Verdana', fontSize)
 
-# Images
+# define image path and name
 menuBackground = pygame.image.load('images/menu.png')
 mainBackground = pygame.image.load('images/main.png')
 resultsBackground = pygame.image.load('images/results.png')
