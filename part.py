@@ -86,7 +86,21 @@ class Part(object):
         pygame.draw.rect(screen, self.partColor, [self.current_pos[0] + self.partPeso,
                                                   self.current_pos[1] + self.partPeso, 50 - self.partPeso * 2,
                                                   50 - self.partPeso * 2])
-
+        if self.current_pos[0] > 476 and self.current_pos[0] < 500:
+            if self.partColor == white:
+                arm = arm1
+                screen.blit(arm, (353, 240))
+            if self.partColor == green:
+                arm = arm2
+                screen.blit(arm, (353, 240))
+            if self.partColor == red:
+                arm = arm3
+                screen.blit(arm, (353, 240))
+            if self.partColor == grey:
+                arm = arm4
+                screen.blit(arm, (353, 240))
+        else:
+            screen.blit(arm0, (353, 240))
     def drawMainFast(self, n):
 
         if self.current_pos[1] > 350 and self.current_pos[0] == 156:
@@ -134,7 +148,21 @@ class Part(object):
         pygame.draw.rect(screen, self.partColor, [self.current_pos[0] + self.partPeso,
                                                   self.current_pos[1] + self.partPeso, 50 - self.partPeso * 2,
                                                   50 - self.partPeso * 2])
-
+        if self.current_pos[0] > 476 and self.current_pos[0] < 525:
+            if self.partColor == white:
+                arm = arm1
+                screen.blit(arm, (353, 240))
+            if self.partColor == green:
+                arm = arm2
+                screen.blit(arm, (353, 240))
+            if self.partColor == red:
+                arm = arm3
+                screen.blit(arm, (353, 240))
+            if self.partColor == grey:
+                arm = arm4
+                screen.blit(arm, (353, 240))
+        else:
+            screen.blit(arm0, (353, 240))
     def drawMainPeso(self):
 
         if self.current_pos[1] > 350 and self.current_pos[0] == 156:
@@ -182,7 +210,21 @@ class Part(object):
         pygame.draw.rect(screen, self.partColor, [self.current_pos[0] + self.partPeso,
                                                   self.current_pos[1] + self.partPeso, 50 - self.partPeso * 2,
                                                   50 - self.partPeso * 2])
-
+        if self.current_pos[0] > 476 and self.current_pos[0] < 500:
+            if self.partPeso == 5:
+                arm = arm1
+                screen.blit(arm, (353, 240))
+            if self.partPeso == 10:
+                arm = arm2
+                screen.blit(arm, (353, 240))
+            if self.partPeso == 15:
+                arm = arm3
+                screen.blit(arm, (353, 240))
+            if self.partPeso == 20:
+                arm = arm4
+                screen.blit(arm, (353, 240))
+        else:
+            screen.blit(arm0, (353, 240))
     def drawMainPesoFast(self, n):
 
         if self.current_pos[1] > 350 and self.current_pos[0] == 156:
@@ -193,6 +235,8 @@ class Part(object):
         speedb = -0.9 * n
         speedc = 0.9 * n
         speedd = 3 * n
+        arm = cover
+
         if self.current_pos[0] == 476:
             if self.partPeso == 5:
                 self.current_speed[1] += speeda
@@ -230,6 +274,21 @@ class Part(object):
         pygame.draw.rect(screen, self.partColor, [self.current_pos[0] + self.partPeso,
                                                   self.current_pos[1] + self.partPeso, 50 - self.partPeso * 2,
                                                   50 - self.partPeso * 2])
+        if self.current_pos[0] > 476 and self.current_pos[0] < 525:
+            if self.partPeso == 5:
+                arm = arm1
+                screen.blit(arm, (353, 240))
+            if self.partPeso == 10:
+                arm = arm2
+                screen.blit(arm, (353, 240))
+            if self.partPeso == 15:
+                arm = arm3
+                screen.blit(arm, (353, 240))
+            if self.partPeso == 20:
+                arm = arm4
+                screen.blit(arm, (353, 240))
+        else:
+            screen.blit(arm0, (353, 240))
 
     def drawResults(self, y):
         pygame.draw.rect(screen, black, [self.menu_pos[0], y, 50, 50])

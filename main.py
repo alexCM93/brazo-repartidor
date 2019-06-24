@@ -109,23 +109,23 @@ while run:
         peso3Group = 0
         peso4Group = 0
         for i in range(0, numberOfParts):
-            if allparts[i].partColor == white:
+            if allparts[i].partPeso == 5:
                 peso1Group += 1
-            if allparts[i].partColor == green:
+            if allparts[i].partPeso == 10:
                 peso2Group += 1
-            if allparts[i].partColor == red:
+            if allparts[i].partPeso == 15:
                 peso3Group += 1
-            if allparts[i].partColor == grey:
+            if allparts[i].partPeso == 20:
                 peso4Group += 1
         for i in range(0, numberOfParts):
             if allparts[i].partColor == white:
-                greyGroup += 1
-            if allparts[i].partColor == green:
                 whiteGroup += 1
-            if allparts[i].partColor == red:
+            if allparts[i].partColor == green:
                 greenGroup += 1
-            if allparts[i].partColor == grey:
+            if allparts[i].partColor == red:
                 redGroup += 1
+            if allparts[i].partColor == grey:
+                greyGroup += 1
         background = menuBackground
         repartoDropDown.draw()
         brazoDropDown.draw()
@@ -194,10 +194,10 @@ while run:
         rec_reset = pygame.draw.rect(screen, green, pygame.Rect(839, 160, 80, 30))
         background = resultsBackground
         if tipoReparto == "Por color":
-            run_button2 = draw_text_with_rectangle(75, 285, grey, str(greyGroup), 30)
-            run_button3 = draw_text_with_rectangle(75, 370, grey, str(whiteGroup), 30)
-            run_button4 = draw_text_with_rectangle(75, 455, grey, str(greenGroup), 30)
-            run_button5 = draw_text_with_rectangle(75, 540, grey, str(redGroup), 30)
+            run_button2 = draw_text_with_rectangle(75, 285, grey, str(whiteGroup), 30)
+            run_button3 = draw_text_with_rectangle(75, 370, grey, str(greenGroup), 30)
+            run_button4 = draw_text_with_rectangle(75, 455, grey, str(redGroup), 30)
+            run_button5 = draw_text_with_rectangle(75, 540, grey, str(greyGroup), 30)
             whiteDist = 0
             greenDist = 0
             redDist = 0
@@ -256,6 +256,14 @@ while run:
                     state = states[0]
                     allparts = []
                     randomParts(numberOfParts, allparts)
+                    greyGroup = 0
+                    whiteGroup = 0
+                    greenGroup = 0
+                    redGroup = 0
+                    peso1Group = 0
+                    peso2Group = 0
+                    peso3Group = 0
+                    peso4Group = 0
     # Update screen
     pygame.display.flip()
 
